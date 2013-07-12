@@ -7,6 +7,7 @@
 //
 
 #import "SGAppDelegate.h"
+#import "SGFirstViewController.h"
 
 @implementation SGAppDelegate
 
@@ -15,6 +16,13 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
+    
+    SGFirstViewController *firstViewController = [[SGFirstViewController alloc] init];
+    
+    self.navigationController = [[UINavigationController alloc] initWithRootViewController:firstViewController];
+    
+    self.window.rootViewController = self.navigationController;
+    
     [self.window makeKeyAndVisible];
     return YES;
 }

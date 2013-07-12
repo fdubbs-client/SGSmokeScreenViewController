@@ -96,8 +96,6 @@
     [self.destinationViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
-
-
 - (void)incrementUseCount
 {
     self.useCount++;

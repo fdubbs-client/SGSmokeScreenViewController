@@ -22,6 +22,8 @@
 		D0A2125317905C7B00B0368B /* SGSmokeScreenAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2124E17905C7B00B0368B /* SGSmokeScreenAnimation.m */; };
 		D0A2125417905C7B00B0368B /* SGSmokeScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2125017905C7B00B0368B /* SGSmokeScreenViewController.m */; };
 		D0A2125517905C7B00B0368B /* UIView+Screenshots.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2125217905C7B00B0368B /* UIView+Screenshots.m */; };
+		D0A2125817905E3400B0368B /* SGFirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2125717905E3400B0368B /* SGFirstViewController.m */; };
+		D0A212601790649600B0368B /* SGSecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0A2125E1790649600B0368B /* SGSecondViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,10 @@
 		D0A2125017905C7B00B0368B /* SGSmokeScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSmokeScreenViewController.m; sourceTree = "<group>"; };
 		D0A2125117905C7B00B0368B /* UIView+Screenshots.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Screenshots.h"; sourceTree = "<group>"; };
 		D0A2125217905C7B00B0368B /* UIView+Screenshots.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Screenshots.m"; sourceTree = "<group>"; };
+		D0A2125617905E3400B0368B /* SGFirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGFirstViewController.h; sourceTree = "<group>"; };
+		D0A2125717905E3400B0368B /* SGFirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGFirstViewController.m; sourceTree = "<group>"; };
+		D0A2125D1790649600B0368B /* SGSecondViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSecondViewController.h; sourceTree = "<group>"; };
+		D0A2125E1790649600B0368B /* SGSecondViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSecondViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,7 +125,10 @@
 			children = (
 				D0A2122C17905C4500B0368B /* SGAppDelegate.h */,
 				D0A2122D17905C4500B0368B /* SGAppDelegate.m */,
-				D0A2122F17905C4500B0368B /* Images.xcassets */,
+				D0A2125617905E3400B0368B /* SGFirstViewController.h */,
+				D0A2125717905E3400B0368B /* SGFirstViewController.m */,
+				D0A2125D1790649600B0368B /* SGSecondViewController.h */,
+				D0A2125E1790649600B0368B /* SGSecondViewController.m */,
 				D0A2122417905C4500B0368B /* Supporting Files */,
 			);
 			path = SGSmokeScreenSample;
@@ -128,6 +137,7 @@
 		D0A2122417905C4500B0368B /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D0A2122F17905C4500B0368B /* Images.xcassets */,
 				D0A2122517905C4500B0368B /* SGSmokeScreenSample-Info.plist */,
 				D0A2122617905C4500B0368B /* InfoPlist.strings */,
 				D0A2122917905C4500B0368B /* main.m */,
@@ -215,6 +225,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Second Gear";
 				TargetAttributes = {
+					D0A2121917905C4500B0368B = {
+						DevelopmentTeam = FS79T9Y9ZN;
+					};
 					D0A2123417905C4500B0368B = {
 						TestTargetID = D0A2121917905C4500B0368B;
 					};
@@ -266,8 +279,10 @@
 				D0A2125417905C7B00B0368B /* SGSmokeScreenViewController.m in Sources */,
 				D0A2125317905C7B00B0368B /* SGSmokeScreenAnimation.m in Sources */,
 				D0A2122E17905C4500B0368B /* SGAppDelegate.m in Sources */,
+				D0A2125817905E3400B0368B /* SGFirstViewController.m in Sources */,
 				D0A2125517905C7B00B0368B /* UIView+Screenshots.m in Sources */,
 				D0A2122A17905C4500B0368B /* main.m in Sources */,
+				D0A212601790649600B0368B /* SGSecondViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -382,9 +397,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SGSmokeScreenSample/SGSmokeScreenSample-Prefix.pch";
 				INFOPLIST_FILE = "SGSmokeScreenSample/SGSmokeScreenSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -395,9 +412,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SGSmokeScreenSample/SGSmokeScreenSample-Prefix.pch";
 				INFOPLIST_FILE = "SGSmokeScreenSample/SGSmokeScreenSample-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -462,6 +481,7 @@
 				D0A2124817905C4500B0368B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D0A2124917905C4500B0368B /* Build configuration list for PBXNativeTarget "SGSmokeScreenSampleTests" */ = {
 			isa = XCConfigurationList;
@@ -470,6 +490,7 @@
 				D0A2124B17905C4500B0368B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
