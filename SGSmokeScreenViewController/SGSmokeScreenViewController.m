@@ -10,14 +10,9 @@
 #import "SGSmokeScreenAnimation.h"
 
 @interface SGSmokeScreenViewController ()
-
 @property (nonatomic, strong) UIViewController *startingViewController;
 @property (nonatomic, strong) UIViewController *destinationViewController;
-@property (nonatomic, assign) NSUInteger useCount;
-
-- (void)incrementUseCount;
-- (void)decrementUseCount;
-
+@property (nonatomic, assign, getter=isUnwinding) BOOL unwinding;
 @end
 
 @implementation SGSmokeScreenViewController
@@ -26,7 +21,6 @@
 {
     if ((self = [super initWithNibName:nil bundle:nil]))
     {
-        self.useCount = 0;
         self.startingViewController = startingViewController;
         self.destinationViewController = destinationViewController;
     }
@@ -48,76 +42,63 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+
+    double totalDuration = [[self.animations valueForKeyPath:@"@sum.duration"] doubleValue];
+    totalDuration += [[self.animations valueForKeyPath:@"@sum.delay"] doubleValue];
     
-    [UIView beginAnimations:nil context:nil];
     for (SGSmokeScreenAnimation *animation in self.animations)
     {
         NSTimeInterval duration = animation.duration;
         NSTimeInterval delay = animation.delay;
-        UIViewAnimationCurve curve = animation.curve;
+        UIViewAnimationCurve options = animation.options;
         
-        [self incrementUseCount];
-        [UIView beginAnimations:nil context:nil];
-        [UIView setAnimationDuration:duration];
-        [UIView setAnimationDelay:delay];
-        [UIView setAnimationCurve:curve];
-        [UIView setAnimationDelegate:self];
-        [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
-        animation.animations(self);
-        [UIView commitAnimations];
+        [UIView animateWithDuration:duration
+							  delay:delay
+							options:options
+						 animations:^{
+                             animation.animations(self);
+                         } completion:nil];
     }
-    [UIView commitAnimations];
-}
-
-- (void)animationDidStop:(NSString *)animationID finished:(NSNumber *)finished context:(void *)context{
-    [self decrementUseCount];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(totalDuration * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self removeSmokescreenIfUseCountIsZero];
+    });
 }
 
 - (void)performTransition
 {
-    self.startingViewController.view.hidden = YES;
-    self.destinationViewController.view.hidden = YES;
-    
-    
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self.view];
+    
+    self.startingViewController.view.hidden = YES;
+    self.destinationViewController.view.hidden = YES;
     
     [self.startingViewController.navigationController presentViewController:self.destinationViewController animated:NO completion:nil];
 }
 
 - (void)unwindTransition
 {
+    self.unwinding = YES;
     self.startingViewController.view.hidden = YES;
     self.destinationViewController.view.hidden = YES;
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self.view];
-    
-    [self.destinationViewController dismissViewControllerAnimated:NO completion:nil];
-}
-
-- (void)incrementUseCount
-{
-    self.useCount++;
-}
-
-- (void)decrementUseCount
-{
-    self.useCount--;
-    
-    [self removeSmokescreenIfUseCountIsZero];
 }
 
 - (void)removeSmokescreenIfUseCountIsZero
 {
-    if (self.useCount != 0)
-    {
-        return;
-    }
-    
     self.startingViewController.view.hidden = NO;
     self.destinationViewController.view.hidden = NO;
+
     [self.view removeFromSuperview];
+    [self resignFirstResponder];
+
+    if (self.isUnwinding == YES)
+    {
+        [self.destinationViewController dismissViewControllerAnimated:NO completion:nil];
+    }
 }
 
 @end
