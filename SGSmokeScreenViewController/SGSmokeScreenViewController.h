@@ -10,10 +10,12 @@
 
 @interface SGSmokeScreenViewController : UIViewController
 
+@property (nonatomic, strong, readonly) UIViewController *startingViewController;
+@property (nonatomic, strong, readonly) UIViewController *destinationViewController;
+
 // The animations array is expecting an array of `SGSmokeScreenAnimation` objects.
 // If it doesn't receive them, we bring back the linen texture.
 @property (nonatomic, strong) NSArray *animations;
-
 
 - (instancetype)initWithStartingViewController:(UIViewController *)startingViewController destinationViewController:(UIViewController *)destinationViewController;
 

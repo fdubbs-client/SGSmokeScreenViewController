@@ -62,7 +62,7 @@
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(totalDuration * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self removeSmokescreenIfUseCountIsZero];
+        [self removeSmokeScreen];
     });
 }
 
@@ -70,11 +70,6 @@
 {
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self.view];
-    
-    self.startingViewController.view.hidden = YES;
-    self.destinationViewController.view.hidden = YES;
-    
-    [self.startingViewController.navigationController presentViewController:self.destinationViewController animated:NO completion:nil];
 }
 
 - (void)unwindTransition
@@ -87,7 +82,7 @@
     [keyWindow addSubview:self.view];
 }
 
-- (void)removeSmokescreenIfUseCountIsZero
+- (void)removeSmokeScreen
 {
     self.startingViewController.view.hidden = NO;
     self.destinationViewController.view.hidden = NO;
