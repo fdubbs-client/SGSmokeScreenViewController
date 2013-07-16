@@ -16,6 +16,7 @@ typedef void (^SGSmokeScreenAnimationsBlock)(SGSmokeScreenViewController *smokeS
 @property (nonatomic, assign) NSTimeInterval duration;
 @property (nonatomic, assign) NSTimeInterval delay;
 @property (nonatomic, assign) UIViewAnimationOptions options;
+@property (nonatomic, copy) SGSmokeScreenAnimationsBlock setupBlock;
 @property (nonatomic, copy) SGSmokeScreenAnimationsBlock animations;
 
 - (instancetype)initWithSmokeScreenView:(SGSmokeScreenViewController *)viewController;

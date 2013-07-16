@@ -48,6 +48,11 @@
     
     for (SGSmokeScreenAnimation *animation in self.animations)
     {
+        if (animation.setupBlock != nil)
+        {
+            animation.setupBlock(self);
+        }
+        
         NSTimeInterval duration = animation.duration;
         NSTimeInterval delay = animation.delay;
         UIViewAnimationCurve options = animation.options;
@@ -75,8 +80,8 @@
 - (void)unwindTransition
 {
     self.unwinding = YES;
-    self.startingViewController.view.hidden = YES;
-    self.destinationViewController.view.hidden = YES;
+//    self.startingViewController.view.hidden = YES;
+//    self.destinationViewController.view.hidden = YES;
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self.view];
@@ -93,6 +98,11 @@
     if (self.isUnwinding == YES)
     {
         [self.destinationViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+    
+    if (self.completionBlock != nil)
+    {
+        self.completionBlock();
     }
 }
 
