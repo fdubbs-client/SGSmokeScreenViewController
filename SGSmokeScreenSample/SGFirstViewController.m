@@ -60,7 +60,7 @@
     SGSmokeScreenAnimation *animation1 = [[SGSmokeScreenAnimation alloc] initWithSmokeScreenView:smokeScreenViewController];
     animation1.duration = 0.2f;
     animation1.delay = 0.0f;
-    animation1.curve = UIViewAnimationCurveLinear;
+    animation1.options = UIViewAnimationOptionCurveLinear;
     animation1.animations =  ^(SGSmokeScreenViewController *smokeScreen){
         [smokeScreenViewController.view addSubview:screenshot];
         
@@ -78,7 +78,7 @@
     SGSmokeScreenAnimation *animation2 = [[SGSmokeScreenAnimation alloc] initWithSmokeScreenView:smokeScreenViewController];
     animation2.duration = 0.2f;
     animation2.delay = 0.0f;
-    animation2.curve = UIViewAnimationCurveLinear;
+    animation2.options = UIViewAnimationOptionCurveLinear;
     animation2.animations =  ^(SGSmokeScreenViewController *smokeScreen) {
         screenshot.alpha = 0.0f;
         blueView.alpha = 1.0f;
