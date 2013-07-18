@@ -55,7 +55,7 @@
         
         NSTimeInterval duration = animation.duration;
         NSTimeInterval delay = animation.delay;
-        UIViewAnimationCurve options = animation.options;
+        UIViewAnimationOptions options = animation.options;
         
         [UIView animateWithDuration:duration
 							  delay:delay
@@ -80,8 +80,6 @@
 - (void)unwindTransition
 {
     self.unwinding = YES;
-//    self.startingViewController.view.hidden = YES;
-//    self.destinationViewController.view.hidden = YES;
     
     UIWindow *keyWindow = [UIApplication sharedApplication].keyWindow;
     [keyWindow addSubview:self.view];
