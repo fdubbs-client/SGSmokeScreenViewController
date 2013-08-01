@@ -93,6 +93,7 @@
     self.destinationViewController.view.hidden = NO;
 
     [self.view removeFromSuperview];
+    self.view = nil;
     [self resignFirstResponder];
 
     if (self.isUnwinding == YES)
