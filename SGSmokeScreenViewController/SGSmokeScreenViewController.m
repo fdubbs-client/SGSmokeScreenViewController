@@ -21,8 +21,8 @@
 {
     if ((self = [super initWithNibName:nil bundle:nil]))
     {
-        self.startingViewController = startingViewController;
-        self.destinationViewController = destinationViewController;
+        _startingViewController = startingViewController;
+        _destinationViewController = destinationViewController;
     }
     return self;
 }
@@ -46,28 +46,30 @@
     double totalDuration = [[self.animations valueForKeyPath:@"@sum.duration"] doubleValue];
     totalDuration += [[self.animations valueForKeyPath:@"@sum.delay"] doubleValue];
     
+    SGBlockWeakSelf bSelf = self;
     for (SGSmokeScreenAnimation *animation in self.animations)
     {
         if (animation.setupBlock != nil)
         {
-            animation.setupBlock(self);
+            animation.setupBlock(bSelf);
         }
         
         NSTimeInterval duration = animation.duration;
         NSTimeInterval delay = animation.delay;
         UIViewAnimationOptions options = animation.options;
         
+        
         [UIView animateWithDuration:duration
 							  delay:delay
 							options:options
 						 animations:^{
-                             animation.animations(self);
+                             animation.animations(bSelf);
                          } completion:nil];
     }
     
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(totalDuration * NSEC_PER_SEC));
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self removeSmokeScreen];
+        [bSelf removeSmokeScreen];
     });
 }
 
